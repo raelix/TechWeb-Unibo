@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Untitled Page</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function anchorclick(v, v2) {
+            
+            alert(v);
+            alert(v2);
+
+        }
+        $(document).ready(function() {
+            $("#anc").click(function() {
+var html = $("#inp").val();                
+var id = $("#inp1").val();
+                anchorclick(html, id);
+            });
+        });
+    </script>
+</head>
+<body>
+<form method="get" action="">
+<input type="text" name="search" id="inp" class='search_box'/>
+<input type="text" name="search" id="inp1" class='search_box'/>
+<input id="anc" type="submit" value="Search" class="search_button" />
+</form>
+<input type="text" id="inp" />
+<a href="#" id="anc"><b>click it</b></a>
+</body>
+</html>

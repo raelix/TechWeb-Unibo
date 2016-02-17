@@ -1,0 +1,13 @@
+<?php
+$file = fopen("scuolematerneBO2011.csv", "r");
+$ciao = "Bolzan";
+while (($data = fgetcsv($file)) !== FALSE)
+{
+	list($Id,$Category,$Name,$Address,$Lat,$Long,$subcategory,$note,$Opening,$Closing,$Creator,$Created,$Valid,$Version,$Source) = $data;
+	
+	if(preg_match($ciao,$Name)){
+	
+   echo "\"$Id\",\"$Category\",\"$Name\",\"$Address\",\"$Lat\",\"$Long\",\"$subcategory\",\"$note\",\"$Opening\",\"$Closing\",\"$Creator\",\"$Created\",\"$Valid\",\"$Version\",\"$Source\" \n";}
+}
+
+?>	

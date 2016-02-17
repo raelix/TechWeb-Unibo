@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<!DOCTYPE locations SYSTEM "http://vitali.web.cs.unibo.it/twiki/pub/TechWeb12/DTDs/locations.dtd" >
+<locations>
+  <metadata>
+    <creator>WebForce-ltw1210</creator>
+    <created>2011-01-18</created>
+    <version>1.0</version>
+    <source>http://viverebo.it/index.php?id=391</source>
+    <valid>2012/2013</valid>
+    <note>Il formato degli orari è come da protocollo MetaMarket 2011</note>
+  </metadata>
+  <location id="cin01" lat="44.4991" long="11.3352">
+    <category>cinema</category>
+    <name>Arlecchino</name>
+    <address>Via delle Lame, 57 - Bologna</address>
+    <tel>+39 051 522285</tel>
+    <opening>Mon, Tue, Thu, Fri,Sat:1500-0130.</opening>
+    <closing>05-01,10-06,02-18</closing>
+  </location>
+  <location id="cin02" lat="44.4569" long="11.3694">
+    <category>cinema</category>
+    <name>Bristol</name>
+    <address>Via Toscana, 146 - 40141 Bologna</address>
+    <tel>+39 051 474015</tel>
+    <opening>Tue, Wed, Thu, Fri, Sat, Sun: 2000-0130.</opening>
+    <closing>05-01, 11-27, 07-09, 01-01</closing>
+  </location>
+  <location id="cin03" lat="44.5032" long="11.3448">
+    <category>cinema</category>
+    <name>Capitol Multisala</name>
+    <address>Via Indipendenza, 74 - Bologna</address>
+    <tel>+39 051 241002</tel>
+    <opening>Mon, Tue, Wed, Thu, Fri, Sat, Sun: 1430-0130.</opening>
+    <closing>05-01, 10-04, 09-22, 06-07, 11-21</closing>
+  </location>
+  <location id="cin04" lat="44.4907" long="11.3310">
+    <category>cinema</category>
+    <name>Chaplin</name>
+    <address>Piazza Saragozza, 5 - Bologna</address>
+    <tel>+39 051 585253</tel>
+    <opening>Mon, Wed, Thu, Fri, Sat, Sun: 2030-2230.</opening>
+    <closing>05-01, 07-10, 08-17</closing>
+  </location>
+  <location id="cin05" lat="44.4961" long="11.3312">
+    <category>cinema</category>
+    <name>Europa</name>
+    <address>Via Pietralata, 55/a - Bologna</address>
+    <tel>+39 051 523812</tel>
+    <opening> Mon, Tue, Wed, Thu, Fri, Sat, Sun: 1600-2230.</opening>
+    <closing>05-01, 02-26</closing>
+  </location>
+  <location id="cin06" lat="44.4822" long="11.3893">
+    <category>cinema</category>
+    <name>Fossolo</name>
+    <address>Via Lincoln, 3 - Bologna</address>
+    <tel>+39 051 540145</tel>
+    <opening>Tue, Wed, Thu, Fri, Sat, Sun: 1530-2230.</opening>
+    <closing>05-01, 08-06, 11-09, 07-07</closing>
+  </location>
+  <location id="cin07" lat="44.4969" long="11.3371">
+    <category>cinema</category>
+    <name>Jolly</name>
+    <address>Via Marconi, 14 - Bologna</address>
+    <tel>+39 051 224605</tel>
+    <opening>Mon, Tue, Thu, Fri, Sat, Sun: 1545-2230.</opening>
+    <closing>05-01, 10-04, 03-14</closing>
+  </location>
+  <location id="cin08" lat="44.5020" long="11.3348">
+    <category>cinema</category>
+    <name>Lumière</name>
+    <address>Via Azzo Giardino, 65 - Bologna</address>
+    <tel>+39 051 195311</tel>
+    <opening>Tue, Wed, Thu, Fri, Sat, Sun: 2030-2230.</opening>
+    <closing>05-01, 05-12, 07-18, 6-07</closing>
+  </location>
+  <location id="cin09" lat="44.4957" long="11.3405">
+    <category>cinema</category>
+    <name>Medica Palace</name>
+    <address>Via Montegrappa, 9 - Bologna</address>
+    <tel>+39 051 232901</tel>
+    <opening>Mon, Tue, Wed, Fri, Sat, Sun: 1530-2230.</opening>
+    <closing>05-01, 08-15</closing>
+  </location>
+  <location id="cin10" lat="44.5024" long="11.3303">
+    <category>cinema</category>
+    <name>Nuovo Nosadella</name>
+    <address>Via L. Berti n. 2/7 - Bologna</address>
+    <tel>+39 051 521550</tel>
+    <opening>Mon, Tue, Wed, Sat, Sun: 1330-1630, 2130-2400.</opening>
+    <closing>05-01, 10-04, 08-15</closing>
+  </location>
+  <location id="cin11" lat="44.4980" long="11.3492">
+    <category>cinema</category>
+    <name>Odeon</name>
+    <address>Via Mascarella, 3 - Bologna</address>
+    <tel>+39 051 227916</tel>
+    <opening>Mon, Tue, Thu, Fri, Sat, Sun: 1550-2230</opening>
+    <closing>05-01, 02-11, 09-26, 12-25</closing>
+  </location>
+  <location id="cin12" lat="44.4886" long="11.3492">
+    <category>cinema</category>
+    <name>Rialto Studio</name>
+    <address>Via Rialto, 19 - Bologna</address>
+    <tel>+39 051 227926</tel>
+    <opening>Mon, Tue, Wed, Thu, Sat, Sun: 1600-2230</opening>
+    <closing>05-01, 04-29, 12-31, 01-01</closing>
+  </location>
+  <location id="cin13" lat="44.4902" long="11.3560">
+    <category>cinema</category>
+    <name>Roma d'Essai</name>
+    <address>Via Fondazza, 4 - Bologna</address>
+    <tel>+39 051 347470</tel>
+    <opening>Tue, Wed, Thu, Fri, Sat, Sun: 1640-2100</opening>
+    <closing>05-01, 08-15, 06-21</closing>
+  </location>
+  <location id="cin14" lat="44.4554" long="11.3681">
+    <category>cinema</category>
+    <name>Smeraldo Digital</name>
+    <address>Via Toscana, 125 - Bologna</address>
+    <tel>+39 051 473959</tel>
+    <opening>Mon, Tue, Wed, Thu, Fri, Sat, Sun: 2005-2230.</opening>
+    <closing>05-01</closing>
+  </location>
+  <location id="cin15" lat="44.5115" long="11.3721">
+    <category>cinema</category>
+    <name>The Space cinema</name>
+    <address>Viale Europa, 5 - Bologna</address>
+    <tel>+39 892111</tel>
+    <opening>Mon, Tue, Wed, Thu, Fri, Sat, Sun: 1430-2230.</opening>
+    <closing>08-15</closing>
+  </location>
+  <location id="cin16" lat="44.5054" long="11.0843">
+    <category>cinema</category>
+    <name>cinemax</name>
+    <address>Viale Carducci, 17 - Bazzano Bologna</address>
+    <tel>+39 051 831174</tel>
+    <opening>Mon, Tue, Thu, Fri, Sat, Sun: 1430-2230.</opening>
+    <closing>05-01, 12-06, 10-04</closing>
+  </location>
+  <location id="cin17" lat="44.6186" long="11.4525">
+    <category>cinema</category>
+    <name>Mandrioli</name>
+    <address>Via Barche, 6 - Ca de Fabbri Bologna</address>
+    <tel>+39 051605013</tel>
+    <opening>Mon, Tue, Wed, Thu, Fri, Sat, Sun: 1430-2230.</opening>
+    <closing>05-01, 03-07, 12-08, 06-18</closing>
+  </location>
+  <location id="cin18" lat="44.4829" long="11.2667">
+    <category>cinema</category>
+    <name>Uci cinemas Meridiana</name>
+    <address>Via Aldo Moro, 14 - Casalecchio di Reno Bologna</address>
+    <tel> +39 892960</tel>
+    <opening>Mon, Tue, Wed, Thu, Sat, Sun: 1610-2245.</opening>
+    <closing>05-01, 02-19, 11-01</closing>
+  </location>
+  <location id="cin19" lat="44.3970" long="11.5893">
+    <category>cinema</category>
+    <name>Jolly</name>
+    <address>Via Matteotti, 99 - Castel San Pietro Terme Bologna</address>
+    <tel>+39 051 944976</tel>
+    <opening>Mon, Wed, Thu, Fri, Sat, Sun: 1640-2100.</opening>
+    <closing>05-28, 11-01, 12-02</closing>
+  </location>
+  <location id="cin20" lat="44.6816" long="11.2960">
+    <category>cinema</category>
+    <name>Don Bosco</name>
+    <address>Via Marconi, 5 - Castello d Argile Bologna</address>
+    <tel> +39 051 976490</tel>
+    <opening>Mon, Wed, Thu, Fri, Sat, Sun: 1640-2100.</opening>
+    <closing>05-28, 11-01, 12-02</closing>
+  </location>
+  <location id="cin21" lat="44.5066" long="11.4712">
+    <category>cinema</category>
+    <name>Italia</name>
+    <address>Via Nasica, 38 - Castenaso Bologna</address>
+    <tel>+39 051 786660</tel>
+    <opening>Mon, Tue, Wed, Fri, Sat, Sun: 2100-0130.</opening>
+    <closing>05-01, 04-09, 09-05, 10-04, 08-15</closing>
+  </location>
+  <location id="cin22" lat="44.1678" long="10.8774">
+    <category>cinema</category>
+    <name>Donfiorentini</name>
+    <address>Viale Marconi, 31 - Imola Bologna</address>
+    <tel>+39 054 228714</tel>
+    <opening>Wed, Thu, Sat, Sun: 2100-2400.</opening>
+    <closing>08-15</closing>
+  </location>
+  <location id="cin23" lat="44.2158" long="11.1745">
+    <category>cinema</category>
+    <name>Mattei</name>
+    <address>Via Borgo 69/2 - Lagaro Bologna</address>
+    <tel>328 4639357</tel>
+    <opening>Mon, Wed, Thu, Sat, Sun: 1600-2230.</opening>
+    <closing>05-01, 04-09, 08-15</closing>
+  </location>
+  <location id="cin24" lat="44.2188" long="11.3191">
+    <category>cinema</category>
+    <name>Aurora</name>
+    <address>Via Vittorio Emanuele II, 37 - Monghidoro Bologna</address>
+    <tel>339 1258090</tel>
+    <opening>Tue, Wed, Thu, Fri, Sat, Sun: 1915-2130.</opening>
+    <closing>12-08, 02-21</closing>
+  </location>
+  <location id="cin25" lat="44.4181" long="11.3476">
+    <category>cinema</category>
+    <name>Starcity cinemas</name>
+    <address>Via Serrabella, 14 - Rastignano Bologna</address>
+    <tel>+39 051 263315</tel>
+    <opening>Tue, Wed, Thu, Fri, Sat, Sun: 2000-2345.</opening>
+    <closing>08-15</closing>
+  </location>
+  <location id="cin26" lat="44.6401" long="11.1904">
+    <category>cinema</category>
+    <name>Giada</name>
+    <address>Circonvallazione Dante, 12 - San Giovanni in Persiceto Bologna</address>
+    <tel>+39 051 822312</tel>
+    <opening>Mon, Tue, Wed, Thu, Sat, Sun: 2000-2400.</opening>
+    <closing>01-01</closing>
+  </location>
+  <location id="cin27" lat="44.6618" long="11.1402">
+    <category>cinema</category>
+    <name>Multisala Century cineci</name>
+    <address>Viale della Repubblica - Sant Agata Bolognese Bologna</address>
+    <tel>+39 051 820045</tel>
+    <opening>Mon, Tue, Wed, Thu, Fri: 2000-2230.</opening>
+    <closing>05-01, 06-01, 08-09</closing>
+  </location>
+</locations>
+

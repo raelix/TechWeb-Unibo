@@ -1,0 +1,58 @@
+<?php
+
+
+function csv2xml($lastTag){
+        $myXml = "";
+        $csv = "./scuolematerneBO2011";
+        //Suddivido tutto le righe
+        $rowCsv = explode("\n", $csv);
+        
+        //Suddivido ogni singola riga in un sottoarray
+        for($j=0; $j<count($rowCsv); $j++){
+            $rowCsv[$j] = explode(";", $rowCsv[$j]);
+        }
+        
+        //Determino la posizione dell'ultimo tag
+        $posLastTag = array_search($lastTag, $rowCsv[0]);
+        
+        //Analizzo ogni singola riga
+        $tagInsert = array();
+        for($i=1; $i<count($rowCsv); $i++){
+            //echo "RIGA: $i";
+            for($j=0; $j<count($rowCsv[$i]); $j++){
+                if($j <= $posLastTag and in_array($rowCsv[$i][$j], $tagInsert) === false){
+                    
+                    $jump = false;
+                    if($i > 1 and $j <= $posLastTag){
+                        $jump = true;
+                        for($k=$posLastTag; $k >= $j; $k--){
+                            //echo "chiudo un TAG (".$tagInsert[$k].") $j<br/><br/>";
+                            $myXml .= "</".$tagInsert[$k].">\n\n";
+                            $tagInsert[$k] = "";
+                        }
+                    }
+                    if($i > 1 and $jump == false){
+                        //echo "chiudo un tag (".$rowCsv[$i-1][$j].")<br/><br/>";
+                        $myXml .= "</".$rowCsv[$i-1][$j].">\n\n";
+                        unset($tagInsert[array_search($rowCsv[$i-1][$j], $tagInsert)]);
+                    }
+                    //echo "aggiungo il tag (".$rowCsv[$i][$j].")<br/><br/>";
+                    $tagInsert[$j] = $rowCsv[$i][$j];
+                    $myXml .= "<".$rowCsv[$i][$j].">\n\n";
+                }
+                if($j > $posLastTag){
+                    //echo "Scrivo tag alunno<br/>";
+                    $myXml .= "<".trim($rowCsv[0][$j]).">".trim($rowCsv[$i][$j])."</".trim($rowCsv[0][$j]).">\n";
+                }
+                
+                //print_r($tagInsert);
+                //echo "<br/>";
+            }
+        }
+        
+        return $myXml;
+        
+    }  
+    csv2xml('Closing');
+?>    
+    

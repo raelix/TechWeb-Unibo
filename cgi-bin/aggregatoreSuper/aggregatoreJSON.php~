@@ -1,0 +1,176 @@
+<?php
+require_once('../funzioni.php');
+
+$headers = ('Content-type: text/html');
+$filejson =file_get_contents("supermarketBO2011.json"); 
+$jsondecoded =json_decode($filejson, true);
+
+
+$key = strtolower($_GET["key"]);
+$conf = strtolower($_GET["comp"]);
+$value = ($_GET["value"]);
+$key = trim($key);
+$conf = trim($conf);
+$value = trim($value);
+
+
+if($_SERVER['REQUEST_METHOD']!="GET")
+{
+	sendHTTPError($Errore[405], "Il metodo utilizzato non e' di tipo GET");
+}
+
+if ($key and $conf and $value)
+{
+	if(correttezzaConfronti($comparazioniValide,$key,$conf) == FALSE)
+	{
+		sendHTTPError($Errore[406], "Comparazione al di fuori delle specifiche");
+	}
+}
+else if (!$key and !$conf and !$value)
+{
+	$loc= $jsondecoded;
+}
+else
+{
+   sendHTTPError($Errore[406], "Parametro non settato");
+}
+
+$conf = strtoupper($_GET["comp"]);
+$value = strtolower($_GET["value"]);
+$key = trim($key);
+$conf = trim($conf);
+$value = trim($value);
+
+
+if (!$key and !$conf and !$value) {
+$loc= $jsondecoded;
+}
+else
+{
+	foreach($jsondecoded["locations"] as $jkey => $jvalue)  // jkey = gli id
+	{
+		if($key == "id")
+		{
+			switch ( $conf ) 
+			{
+				case 'EQ' : 
+					if(strcasecmp($jkey,$value)==0)  $s[$jkey]=$jvalue;break;
+				case 'NE' : 
+					if(strcasecmp($jkey,$value)!=0)  $s[$jkey]=$jvalue;break;
+				case 'CONTAINS' : 
+					if( stristr($jkey,$value)) $s[$jkey]=$jvalue;break;
+			}
+			
+		}elseif($key== "category")
+		{
+                       $jivalue= $jvalue[$key];
+				foreach($jivalue as  $jiivalue) {
+				//print_r($jiivalue);
+				switch ($conf)
+				{
+				case 'EQ' : 
+					if(strcasecmp($jiivalue,$value)==0)  $s[$jkey]=$jvalue;break;
+				case 'NE' : 
+					if(strcasecmp($jiivalue,$value)!=0)  $s[$jkey]=$jvalue;break;
+				case 'CONTAINS' : 
+					if( stristr($jiivalue,$value)) $s[$jkey]=$jvalue;break;
+				case 'NCONTAINS' : 
+					if( !stristr($jiivalue,$value)) $s[$jkey]=$jvalue;break;	
+				}
+			
+		}}
+
+		else{ foreach($jvalue as $jikey => $jivalue) {
+				switch ( $conf )
+			{
+				case 'EQ' :
+					switch($key) {
+						case 'name' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)==0)  $s[$jkey]=$jvalue;}break;
+						case 'lat' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)==0)  $s[$jkey]=$jvalue;}break;
+						case 'long' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)==0)  $s[$jkey]=$jvalue;}break;
+						
+} break;
+
+				case 'NE' :
+					switch($key) {
+						case 'name' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)!=0)  $s[$jkey]=$jvalue;}break;
+						case 'lat' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)!=0)  $s[$jkey]=$jvalue;}break;
+						case 'long' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)!=0)  $s[$jkey]=$jvalue;}break;
+						case 'category' :
+							if ( strcasecmp($jikey,$key)==0) { if (strcasecmp($jivalue,$value)!=0)  $s[$jkey]=$jvalue;}break;
+	}break;			
+				case 'CONTAINS' :
+					switch($key) {
+						case 'name' :
+							if ( strcasecmp($jikey,$key)==0) { if( stristr($jivalue, $value))  $s[$jkey]=$jvalue;}break;
+						case 'address' :
+							if ( strcasecmp($jikey,$key)==0) { if( stristr($jivalue,$value))  $s[$jkey]=$jvalue;}break;
+						case 'opening' :
+							if ( strcasecmp($jikey,$key)==0) { if( stristr($jivalue,$value))  $s[$jkey]=$jvalue;}break;
+						case 'closing' :
+							if ( strcasecmp($jikey,$key)==0) { if(stristr($jivalue,$value))  $s[$jkey]=$jvalue;}break;
+		} break;
+				case 'NCONTAINS' :
+					switch($key) {
+						case 'name' :
+							if ( strcasecmp($jikey,$key)==0) { if( !stristr($jivalue, $value))  $s[$jkey]=$jvalue;}break;
+						case 'address' :
+							if ( strcasecmp($jikey,$key)==0) { if( !stristr($jivalue,$value))  $s[$jkey]=$jvalue;}break;
+						case 'opening' :
+							if ( strcasecmp($jikey,$key)==0) { if( !stristr($jivalue,$value))  $s[$jkey]=$jvalue;}break;
+						case 'closing' :
+							if ( strcasecmp($jikey,$key)==0) { if( !stristr($jivalue,$value))  $s[$jkey]=$jvalue;}break;
+		} break;
+				case 'GT' :
+					switch($key) {
+					
+						case 'lat' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue > $value)  $s[$jkey]=$jvalue;}break;
+						case 'long' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue > $value)  $s[$jkey]=$jvalue;}break;
+} break;
+
+				case 'LT' :
+					switch($key) {
+					
+						case 'lat' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue < $value)  $s[$jkey]=$jvalue;}break;
+						case 'long' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue < $value)  $s[$jkey]=$jvalue;}break;
+} break;
+
+
+				case 'GE' :
+					switch($key) {
+					
+						case 'lat' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue >= $value)  $s[$jkey]=$jvalue;}break;
+						case 'long' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue >= $value)  $s[$jkey]=$jvalue;}break;
+} break;
+
+				case 'LE' :
+					switch($key) {
+					
+						case 'lat' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue <= $value)  $s[$jkey]=$jvalue;}break;
+						case 'long' :
+							if ( strcasecmp($jikey,$key)==0) { if ($jivalue <= $value)  $s[$jkey]=$jvalue;}break;
+} break;
+
+
+
+break; }}}}
+  
+      $loc=array("locations"=>$s, "metadata"=>array());
+		$loc["metadata"] = $jsondecoded["metadata"];}
+		$body = json_encode($loc);		
+
+sendHTTPResult($headers, $body);
+?>

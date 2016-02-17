@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><!-- Gabriele Cigna -->
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<title>Project Tech Web 2011/2012</title>
+<img src="./logoyeah.bmp" width="100%" height="90" alt="Caricamento logo..." />
+
+<script type="text/javascript" src="ext-all.js"></script>
+<script type="text/javascript" src="ext.js"></script>    
+<script type="text/javascript" src="bootstrap.js"></script>    
+<link rel="stylesheet" type="text/css" href="resources/css/ext-all.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=AIzaSyAyRya3WLFvGFkGHD8xc7RdZjouBYqLlCw" type="text/javascript"></script>
+</head>
+
+<body id="Data-store" onload="loadXMLDocSTART();">
+
+    <noscript><b>JavaScript must be enabled in order for you to use Google Maps.</b> 
+      However, it seems JavaScript is either disabled or not supported by your browser. 
+      To view Google Maps, enable JavaScript by changing your browser options, and then 
+      try again.
+    </noscript>
+ 
+<script type="text/javascript">
+
+//Dichiaro delle variabili globali
+var user_lat;
+var user_long;
+var conta=0;
+
+// FUNZIONI //
+
+//Funzione per convalidare la selezione di una o piu categorie
+function controlla(categorie)
+{
+	if (categorie.checked)
+	{
+		conta++;		
+	}
+	else
+	{
+		conta>0?conta--:null; 
+	}
+}
+
+//Ricavo le coordinate dell'utente
+if (navigator.geolocation) 
+{
+	navigator.geolocation.getCurrentPosition( 
+ 
+		function (position) 
+		{  
+			//Aggiorno i valori delle variabili globali
+			user_lat = position.coords.latitude;
+			user_long = position.coords.longitude;			
+		} 
+
+		);
+
+}
+
+//Descrittore descrizione
+function dettagli(sito){
+
+	var subid = sito.substring(3,0);
+	//Ricavo gli id degli aggregatori selezionati
+	switch(subid){
+		case "cin": var cat = "ltw1210-cinema";break;
+		case "ris": var cat = "ltw1209-ristoranti";break;
+		case "bar": var cat = "ltw1209-bar";break;
+	}
+	//Creo il collegamento al descrittore
+	var web = 'http://ltw1134.web.cs.unibo.it/descrittore-descrizione/'+cat+'/params/'+sito;
+	//Creo una finestra iframe di Extjs
+	this.win = new Ext.Window({  
+		 title: '<center>Detail Windows</center>',  
+		 width: 700,  
+		 height: 400,    
+		 maximizable: true,  
+		 maskDisabled: true,  
+		 bodyStyle: 'background-color:#fff',  
+		 html: '<iframe id="container" src="'+web+'" style="width:100%;height:100%;border:none"></iframe>'  
+	});  
+	//Apro la finestra  
+	this.win.show(); 
+}
+
+//Geolocalizzazione Extra
+function loca_geo_max(sito){
+	//Creo un array con le variabili passate comke argomento
+	var data=sito.split("&&");
+	//Creo la finestra iframe di ExtJs
+	this.win = new Ext.Window({  
+		 title: 'Geo Multiple Maps',  
+		 width: 810,  
+		 height: 590,    
+		 maximizable: true,  
+		 maskDisabled: true,  
+		 bodyStyle: 'background-color:#fff',  
+		 html: '<iframe style="width:100%;height:100%;padding:0;border:solid 1px black" src="http://data.dualmaps.com/dualmaps4/map.htm?x='+data[1]+'&y='+data[0]+'&z=15&gm=0&ve=5&gc=0&bz=1&bd=0&mw=1&sv=1&sva=1&svb=0&svp=0&svz=0&svm=2&svf=0&sve=1&mi=0&mg=1&mv=1&addr='+data[2]+'&fp=0" marginwidth="0" marginheight="0" frameborder="0" scrolling="no"></iframe>'  
+	});  
+	//Apro la finestra  
+	this.win.show(); 
+}
+
+//Ricerca entro il raggio
+function get_check_value(parametri)
+{
+	//Creola lista degli aggregatori in cui ricercare
+	var c_value = "";
+	//prelevando i valori dei checkbox del form
+	for (var i=0; i < document.orderform.categoria.length; i++)
+		{
+		if (document.orderform.categoria[i].checked)
+		   {
+		   c_value = c_value + document.orderform.categoria[i].value + "/";
+		   }
+		}
+		if(c_value==""){
+			Ext.MessageBox.alert('<center>Attenzione</center>', 'Selezionare almeno una tipologia di attivita.');
+		}else{
+		//Genero l'url
+		var dede = 'http://ltw1134.web.cs.unibo.it/descrittore-entro-il-raggio/'+c_value+'params/'+parametri;
+		var url_complete = "http://ltw1210.web.cs.unibo.it/cgi-bin/localproxy.php?url="+dede;
+								
+		//Aggiorno il proxy dello store						
+		store.proxy.url = url_complete;
+		store.read();
+		}
+}
+
+//Funzione per aggiornare il contenuto dello store 
+function updateStore(url){
+	//Leggo la categoria selezionata nella listview
+	var w = document.myform.mylist.selectedIndex;
+   var cat = document.myform.mylist.options[w].value;
+   //Aggiorno il proxy dello store facendo richiesta al descrittore Ricerca per nome
+	if(url)
+	{				
+		store.proxy.url = 'http://ltw1210.web.cs.unibo.it/Trova-per-nome/'+cat+'/params/'+url;
+		store.read();        
+	}
+	else
+	{
+		store.proxy.url = 'http://ltw1210.web.cs.unibo.it/Trova-per-nome/'+cat+'/params/*';
+		store.read();
+	}
+}
+
+var distanza = 0;  
+         
+//Carico la mappa con la posizione dell'utente         
+function loadXMLDocSTART(url){   
+
+   if (GBrowserIsCompatible()) 
+   {   	 
+		if (navigator.geolocation) 
+		{
+			navigator.geolocation.getCurrentPosition( 
+		 
+				function (position) 
+				{  					
+					var user_lat = position.coords.latitude;
+					var user_long = position.coords.longitude;	
+					var map = new GMap2(document.getElementById("map"));
+					map.setCenter(new GLatLng(user_lat, user_long),13);
+					var point = new GLatLng(user_lat,user_long);	
+					var marker = new GMarker(point); 
+					map.addOverlay(marker);
+					map.setUIToDefault();
+				}
+				
+				);
+		}      		
+	}
+}         
+         
+//Funzione che una volta selezionata una location ne trova la posizione sulla mappa         
+function loadXMLDoc(url){ //Gabriele Cigna - Gianmarco Ascenzo  
+
+      //Creo la mappa
+      var map = new GMap2(document.getElementById("map"));
+	   map.setUIToDefault();      
+
+
+      //Creo il marker
+      function createMarker(point,name,html,address) {
+        var marker = new GMarker(point);
+        GEvent.addListener(marker, "click", function() {
+          marker.openInfoWindowHtml(html);
+
+        });
+        return marker;
+      }
+
+
+		//Dichiaro le connessioni XMLHttp che usero
+	   var xmlhttp = new XMLHttpRequest();
+	   var xmlhttp2 = new XMLHttpRequest();
+	      	   	   
+      if(url)
+      {  	
+      		//Converto la data attuale nel formato richiesto nel protocollo
+      		var currentTime = new Date();
+				var month = currentTime.getMonth() + 1;
+				var day = currentTime.getDate();
+				var year = currentTime.getFullYear();
+				var curr_hour = currentTime.getHours();
+				var next_min = currentTime.getMinutes()+1;
+				var next_hour = currentTime.getHours()+1;
+				var curr_min = currentTime.getMinutes();
+
+				if(curr_hour<10){curr_hour="0"+curr_hour; if(next_hour<10){next_hour="0"+next_hour;}}
+				if(curr_min<10){curr_min="0"+curr_min; if(next_min<10){next_min="0"+next_min;}}
+
+				if(next_hour==24 && next_min>00){ next_hour = '00'; }
+				if(month<10){month="0"+month;}
+				if(day<10){day="0"+day;}
+				
+				//Genero i due intervalli da mandare ai descrittori Aperto e Aprira'
+				var Adesso = year + "-" + month + "-" + day+": "+curr_hour+curr_min+"-"+curr_hour+next_min;
+				var Adesso2 = year + "-" + month + "-" + day+": "+curr_hour+curr_min+"-"+next_hour+curr_min;
+
+				var data=url.split("&&");
+				
+				//Posiziono il marker sulla mappa e aggiorno il suo html con le informazioni ricavate dai descrittori
+            var point = new GLatLng(data[1],data[2]);								 								
+ 	 		   var html = "<b>"+data[0]+""+"<br>Distanza:</b>"; 	 		    
+            map.setCenter(new GLatLng(data[1],data[2]),13);
+          
+            xmlhttp.open("GET", "http://ltw1210.web.cs.unibo.it/Distanza/params/"+user_lat+"/"+user_long+"/"+data[1]+"/"+data[2], true);
+            				
+				xmlhttp.onreadystatechange=function() {
+				if (xmlhttp.readyState==4) {
+						 	distanza = parseInt(xmlhttp.responseText);	
+						 	html = html+distanza+' <i>(metri)</i>';
+
+						 	xmlhttp2.open("GET", "http://ltw1210.web.cs.unibo.it/Aperto/params/"+data[4]+"/"+Adesso, true);				
+							xmlhttp2.onreadystatechange=function() {
+								if (xmlhttp2.readyState==4) {
+							 	var stato = xmlhttp2.responseText;	
+							 	html = html+"<br><b>Stato Attuale:</b> "+stato;
+
+								var temp = 'http://ltw1140.web.cs.unibo.it/aprira/params/'+data[4]+'/'+Adesso2;
+								var url = 'http://ltw1210.web.cs.unibo.it/cgi-bin/localproxy.php?url=';
+								var url1 = url+temp;
+
+								Ext.Ajax.request({
+									url: url1,
+									success:function(response) { 
+										
+										if(response.responseText == 0){ var stato_dopo = "Chiuso";}	else								
+										if(response.responseText == 1){ var stato_dopo = "Aprirà";} else
+										if(response.responseText == 2){ var stato_dopo = "Aperto";} else
+										if(response.responseText == 3){ var stato_dopo = "Chiuderà";} else
+										if(response.responseText == 4){ var stato_dopo = "Chiuderà";} else
+										if(response.responseText == -1){ var stato_dopo = "Dati Errati";}else
+											{var stato_dopo = "Non Disponibile";}
+									
+									 	html = html+"<br><b>Stato nella prossima ora:</b> "+stato_dopo;
+									 	var marker = createMarker(point,data[0],html,data[3]);
+									 	map.addOverlay(marker);			
+									 	var nameGeo = data[1]+"&&"+data[2]+"&&"+data[3];
+									 	html = html+'<br><input type="button" name="'+nameGeo+'" value="GeoLocalizzazione Extra" onclick="loca_geo_max(this.name)" />';
+									 	marker.openInfoWindowHtml(html);
+									},
+									failure:function() { alert("Errore di comunicazione"); } 
+								});
+							 	
+							  }
+							}
+							xmlhttp2.send();
+						 	
+						  	}
+					}
+					xmlhttp.send();
+					
+					
+      }
+}
+
+//Creo il pannello ExtJs ed i vari componenti
+
+Ext.require([
+    'Ext.grid.*',
+    'Ext.data.*',
+    'Ext.panel.*',
+    'Ext.layout.container.Border'
+]); 
+
+
+
+   Ext.define('Locazione',{
+        extend: 'Ext.data.Model',
+        fields: [
+            // set up the fields mapping into the xml doc
+            // The first needs mapping, the others are very basic
+            {name: 'id', mapping: '@id'},
+            {name: 'lat', mapping: '@lat'},
+            {name: 'long', mapping: '@long'},
+            'name',
+            'address',
+            'tel',
+            'category',
+            'opening',
+            'closing'
+        ]
+    });
+
+    //Creo lo Store
+    var store = Ext.create('Ext.data.Store', {
+        model: 'Locazione',
+        proxy: {
+            // load using HTTP
+            type: 'ajax',
+            url: "http://ltw1210.web.cs.unibo.it/cinema/",
+            headers: {'Accept': 'application/xml'},
+            reader: {
+                type: 'xml',
+                record: 'location',
+                totalProperty  : 'total'
+            }
+        }
+    });
+    
+    //Creo la griglia
+    var grid = Ext.create('Ext.grid.Panel', {
+        store: store,
+        columns: [   
+            {text: "<center><b>Nome</b></center>", width: 150, dataIndex: 'name', sortable: true},
+            {text: "<center><b>Categoria</b></center>", width: 100, dataIndex: 'category', sortable: true},            
+            {text: "<center><b>Indirizzo</b></center>", width: 270, dataIndex: 'address', sortable: false},
+            {text: "<center><b>Telefono</b></center>", width: 100, dataIndex: 'tel', sortable: false}            
+            ],
+	 defaults: {autoScroll: true},
+        split: true,
+	 width: '50%',
+	 height: 700,
+        region: 'west',
+      	 minSize: 670,
+   	 maxSize: 670
+    });
+
+   //Contenuto html del pannello dei dettagli
+    var bookTplMarkup = [
+        '<center><br><b>{name}</b><br>({category})<br>',
+        '<input type="button" name="{id}" value="Descrizione Extra" onclick="dettagli(this.name)" /><br><br><b>Ricerca in zona</b><br>',
+        'Selezionare i luoghi di interesse...<form name="orderform"><input type="checkbox" name="categoria" value="ltw1210-cinema">Cinema<input type="checkbox" name="categoria" value="ltw1209-ristoranti">Ristoranti<input type="checkbox" name="categoria" value="ltw1209-bar">Bar<br>...ed un range di ricerca dal luogo selezionato<br><input name="{lat}/{long}/120" value="100(mt)" type="button" onclick="get_check_value(this.name)"><input name="{lat}/{long}/270" value="250(mt)" type="button" onclick="get_check_value(this.name)"><input name="{lat}/{long}/520" value="500(mt)" type="button" onclick="get_check_value(this.name)"><input name="{lat}/{long}/1100" value="1000(mt)" type="button" onclick="get_check_value(this.name)"></form>'     
+    ];
+    var bookTpl = Ext.create('Ext.Template', bookTplMarkup);
+
+    Ext.create('Ext.Panel', {
+        renderTo: 'Data-store',
+        frame: true,
+        title: '',
+        width: '100%',
+        height: 750,
+        layout: 'column',
+		  items: [grid,{
+			 title: '<center>Ricerca Personalizzata</center>',
+			 id: 'strumenti',	
+			 region: 'center',
+			width: '25%',
+			 height: 200,
+			 html: '<br><center><b>Ricerca per Nome</b><br><br>Selezionare una Categoria per visualizzare le locazioni<br><br><FORM NAME="myform" action="javascript:updateStore(document.myform.s.value);"><SELECT NAME="mylist" onChange="javascript:updateStore();"><OPTION VALUE="ltw1210-cinema">Cinema<OPTION VALUE="ltw1209-ristoranti">Ristoranti<OPTION VALUE="ltw1209-bar">Bar<input type="text" name="s" value="" /></FORM><br>Per ricercare un luogo nella categoria selezionata digitare un Nome e premere Invio</center>',
+			 cmargins: '5 0 0 0'
+		},{
+			 title: '<center>Info e Dettagli</center>',
+			 id: 'detailPanel',	
+			 region: 'center',
+			 height: 200,
+			 width: '25%',
+			 html: '<br><br><br><center><b>Selezionare un luogo<br><br>per i dettagli</b></center>',
+			 cmargins: '5 0 0 0'
+		},{
+			 title: '<center>Google Map</center>',
+			 html: '<center><br><div id="map" style="width: 550px; height: 450px"></div></center>',	
+			 collapsible: false,
+			 width: '50%',
+			 height: 500,
+			 region:'center',
+			 margins: '0 0 0 0'
+		}]
+			 });
+
+    
+    //Aggiorno il pannello dei dettagli alla selezione di un record
+    grid.getSelectionModel().on('selectionchange', function(sm, selectedRecord) 
+    {
+        if (selectedRecord.length) 
+        {	
+            var detailPanel = Ext.getCmp('detailPanel');
+            bookTpl.overwrite(detailPanel.body, selectedRecord[0].data);
+            var Temp = selectedRecord[0].data['name']+'&&'+selectedRecord[0].data['lat']+'&&'+selectedRecord[0].data['long']+'&&'+selectedRecord[0].data['address']+'&&'+selectedRecord[0].data['opening'];
+            loadXMLDoc(Temp);
+            
+        }               
+    }); 
+
+//Carico lo store
+store.load();
+
+
+
+
+</script>
+
+</body>
+
+</html>
+
+
+
+

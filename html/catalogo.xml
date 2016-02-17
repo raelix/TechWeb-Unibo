@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalogo SYSTEM "http://vitali.web.cs.unibo.it/twiki/pub/TechWeb12/DTDs/catalogo.dtd">
+<catalogo id="ltw1210" gruppo="WebForce">
+	<aggregatori>
+		<aggregatore id="ltw1210-farmacie" title="Farmacie di Bologna" url="http://ltw1210.web.cs.unibo.it/farmacie/">Dati riguardo le maggiori farmacie di Bologna città, con locazioni, indirizzi e orari di apertura.
+      </aggregatore>
+      <aggregatore id="ltw1210-supermercati" title="Supermercati di Bologna" url="http://ltw1210.web.cs.unibo.it/supermercati/">Dati riguardo i maggiori supermercati di Bologna città, con locazioni, indirizzi e orari di apertura.
+      </aggregatore>
+      <aggregatore id="ltw1210-scuole-materne" title="Scuole Materne di Bologna" url="http://ltw1210.web.cs.unibo.it/scuole-materne/">Dati riguardo le Scuole Materne di Bologna città, con locazioni, indirizzi e orari di apertura.
+      </aggregatore>
+      <aggregatore id="ltw1210-cinema" title="Cinema di Bologna e Provincia" url="http://ltw1210.web.cs.unibo.it/cinema/">Dati riguardo i Cinema di Bologna città e provincia.
+      </aggregatore>
+   </aggregatori>   
+   <descrittori>
+    </descrittori>
+</catalogo>

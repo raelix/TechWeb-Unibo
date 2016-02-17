@@ -1,0 +1,45 @@
+RewriteEngine On
+
+# Redirect al catalogo
+RewriteRule ^catalogo$ /catalogo.xml
+
+RewriteRule ^cinema$	/cgi-bin/aggregatoreCinema/aggregatoreCINEMA.php
+RewriteRule ^cinema/$	/cgi-bin/aggregatoreCinema/aggregatoreCINEMA.php
+RewriteRule ^cinema/([^/]+)/?$	/cgi-bin/aggregatoreCinema/aggregatoreCINEMA.php?key=$1
+RewriteRule ^cinema/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreCinema/aggregatoreCINEMA.php?key=$1&comp=$2
+RewriteRule ^cinema/([^/]+)/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreCinema/aggregatoreCINEMA.php?key=$1&comp=$2&value=$3
+
+RewriteRule ^farmacie$	/cgi-bin/aggregatoreFarmacie/aggregatoreFarmacie.php
+RewriteRule ^farmacie/$	/cgi-bin/aggregatoreFarmacie/aggregatoreFarmacie.php
+RewriteRule ^farmacie/([^/]+)/?$	/cgi-bin/aggregatoreFarmacie/aggregatoreFarmacie.php?key=$1
+RewriteRule ^farmacie/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreFarmacie/aggregatoreFarmacie.php?key=$1&comp=$2
+RewriteRule ^farmacie/([^/]+)/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreFarmacie/aggregatoreFarmacie.php?key=$1&comp=$2&value=$3
+
+RewriteRule ^scuole-materne$	/cgi-bin/aggregatoreScuole/aggregatoreScuole.php
+RewriteRule ^scuole-materne/$	/cgi-bin/aggregatoreScuole/aggregatoreScuole.php
+RewriteRule ^scuole-materne/([^/]+)/?$	/cgi-bin/aggregatoreScuole/aggregatoreScuole.php?key=$1
+RewriteRule ^scuole-materne/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreScuole/aggregatoreScuole.php?key=$1&comp=$2
+RewriteRule ^scuole-materne/([^/]+)/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreScuole/aggregatoreScuole.php?key=$1&comp=$2&value=$3
+
+RewriteRule ^supermercati$	/cgi-bin/aggregatoreSuper/aggregatoreSuper.php
+RewriteRule ^supermercati/$	/cgi-bin/aggregatoreSuper/aggregatoreSuper.php
+RewriteRule ^supermercati/([^/]+)/?$	/cgi-bin/aggregatoreSuper/aggregatoreSuper.php?key=$1
+RewriteRule ^supermercati/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreSuper/aggregatoreSuper.php?key=$1&comp=$2
+RewriteRule ^supermercati/([^/]+)/([^/]+)/([^/]+)/?$	/cgi-bin/aggregatoreSuper/aggregatoreSuper.php?key=$1&comp=$2&value=$3
+
+RewriteRule ^Trova-per-nome$	/cgi-bin/descrittori/Trova-per-nome.php
+RewriteRule ^Trova-per-nome/$	/cgi-bin/descrittori/Trova-per-nome.php
+RewriteRule ^Trova-per-nome/([^/]+)/?$	/cgi-bin/descrittori/Trova-per-nome.php?aggr_id=$1
+RewriteRule ^Trova-per-nome/([^/]+)/params/([^/]+)/?$	/cgi-bin/descrittori/Trova-per-nome.php?aggr_id=$1&s=$2
+
+RewriteRule ^Distanza$	/cgi-bin/descrittori/Distanza.php
+RewriteRule ^Distanza/$	/cgi-bin/descrittori/Distanza.php
+RewriteRule ^Distanza/params/([^/]+)/?$	/cgi-bin/descrittori/Distanza.php?lat1=$1
+RewriteRule ^Distanza/params/([^/]+)/([^/]+)/?$	/cgi-bin/descrittori/Distanza.php?lat1=$1&long1=$2
+RewriteRule ^Distanza/params/([^/]+)/([^/]+)/([^/]+)/?$	/cgi-bin/descrittori/Distanza.php?lat1=$1&long1=$2&lat2=$3
+RewriteRule ^Distanza/params/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$	/cgi-bin/descrittori/Distanza.php?lat1=$1&long1=$2&lat2=$3&long2=$4
+
+RewriteRule ^Aperto$	/cgi-bin/descrittori/Aperto.php
+RewriteRule ^Aperto/$	/cgi-bin/descrittori/Aperto.php
+RewriteRule ^Aperto/params/([^/]+)/?$	/cgi-bin/descrittori/Aperto.php?orario1=$1
+RewriteRule ^Aperto/params/([^/]+)/([^/]+)/?$	/cgi-bin/descrittori/Aperto.php?orario1=$1&orario2=$2
